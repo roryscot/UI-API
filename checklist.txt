@@ -11,6 +11,10 @@ syntax highlighting X
 tests
   success
   error
+  edgeecases
+  empty lists
+  long lists
+  long values 
   replaces object after first success
 
 scalability
