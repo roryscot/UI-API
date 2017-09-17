@@ -14,7 +14,7 @@ app.use(require('webpack-dev-middleware')(compiler, {
 
 //declare routing
 app.get('/', function(req, res) {
-  res.sendFile(path.join(__dirname, '../src/index.html'));
+  res.sendFile(path.join(__dirname, '../src/interface.html'));
 });
 
 app.listen(port, function(err) {

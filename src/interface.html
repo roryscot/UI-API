@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Schibsted API Interface</title>
+    <meta charset="utf-8">
+
+  </head>
+
+  <body>
+    <header>
+      <div class="navbar" >
+        <div class="navbar-logo">
+          Schibsted REST framework <span class="version">v 3.11</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="container" >
+      <div class="content">
+        <div class="content-header">
+          <h1>Advertiser List</h1>
+        </div>
+        <div class="selector tooltip">
+          <span class="tooltiptext">Specify a format for the GET request</span>
+          <select class="select-format"  name="" id="format-selection"
+          >
+            <option value="" selected disabled hidden>JSON</option>
+            <option value="json">json</option>
+            <option value="xml">xml</option>
+          </select>
+      </div>
+        <div class="request request-info">
+          <span class="method">GET</span>
+          <span class="uri">/advertisers/?format=api</span>
+          <span class="version"></span>
+        </div>
+        <div class="request">
+          <pre id="responseDisplay" class="language-markup"><br/><code class="language-http" id="responseDisplayHeaders"></code><br/><code class="language-json" id="responseDisplayJSON"></code><br/><code class="language-markup" id="responseDisplayXML"></code></pre>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/javascript" src="bundle.js"></script>
+  </body>
+</html>
