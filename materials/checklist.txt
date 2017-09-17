@@ -1,0 +1,27 @@
+
+
+
+css X
+
+
+
+ajax request--> xml json X
+syntax highlighting X
+
+tests
+  success
+  error
+  replaces object after first success
+
+scalability
+performance strategies
+
+
+
+
+constraints--
+
+
+no frameworks or 3rd party libraries X
+should hold up in IE9 (polyfills) X
+should funciton on mobile X
