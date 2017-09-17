@@ -18,5 +18,5 @@ var url, params;
 var el = document.getElementById("format-selection");
 el.addEventListener("change", function() {
   url = '/advertisers/response.' + this.value
-  ajaxController.renderObject(url, Prism.highlightAll());
+  ajaxController.renderObject(url, Prism.highlightAll);
 });
