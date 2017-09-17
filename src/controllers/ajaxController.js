@@ -18,7 +18,6 @@ function ajaxController() {
         if (httpRequest.status < 200 || httpRequest.status >= 300) {
           alert("There was a problem processing your request.")
           var errorMessage = `Error: ${httpRequest.status} ${httpRequest.statusText}`;
-          console.log(httpRequest.status);
           document.getElementById(idsToBeSwapped[0]).innerHTML = errorMessage;
           return httpRequest;
         }
@@ -32,12 +31,14 @@ function ajaxController() {
           callback(httpRequest, url, headersId, responseId, syntaxHighlighting);
         }
     };
+
+    console.log(typeof httpRequest)
     httpRequest.open('GET', url, true);
     httpRequest.send();
 
     return httpRequest;
   }
-
+// run replaceObject on an instance of a request
   function replaceObject(httpRequest, url, headersId, responseId, syntaxHighlighting) {
     var responseToBeFormatted = httpRequest.responseText;
     var headers = `HTTP ${httpRequest.status} ${httpRequest.statusText}\n`;

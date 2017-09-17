@@ -1,21 +1,24 @@
 var path = require('path');
 var webpack = require('webpack');
+var CleanWebpackPlugin = require('clean-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
-
 module.exports = {
-  devtool: 'inline-source-map',
+  devtool: 'source-map',
   entry: {
     main: path.resolve(__dirname, 'src/index.js'),
     vendor: path.resolve(__dirname, 'src/vendor.js')
   },
   target: 'web',
   output: {
-    filename: '[name].js',
+    filename: 'bundle.js',
     publicPath: '/',
-    path: path.resolve(__dirname, 'src')
+    path: path.resolve(__dirname, 'dist')
   },
-  plugins:[
+  plugins: [
+    //clear out dist
+    new CleanWebpackPlugin(['dist']),
+    //Create html file that refers to bundle
     new HtmlWebpackPlugin({
       template: 'src/interface.html',
       inject: true,

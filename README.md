@@ -58,6 +58,11 @@ centralize API calls
     -single seam for mocking API
 
 improvements:
+    bundle splitting
+    tree shaking
+    cache busting
+
+    error tracking and logging via track js
 
 linting
   enforece consistency
@@ -71,4 +76,4 @@ transpiling
 
 for integration testing with external resources, use selenium.
 
-selective polyfilling 
+selective polyfilling
