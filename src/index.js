@@ -1,13 +1,10 @@
 import './themes/style.css';
 import '../lib/prism/prism.css'
 
-import {getObj} from './api/objectApi.js'
-
 import background from './img/background.png';
 import ajaxController from './controllers/ajaxController.js';
 import setupController from './controllers/setupController.js';
 import Prism from '../lib/prism/prism.js';
-
 
 import idsToBeSwapped from './idsToBeSwapped.js';
 import initialStrings from './initialStrings.js';

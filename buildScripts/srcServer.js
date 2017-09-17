@@ -1,7 +1,5 @@
 var express = require('express');
-var xml = require('xml');
 var path = require('path');
-var open = require('open');
 var webpack = require('webpack');
 var config = require('../webpack.config.dev.js')
 
@@ -26,7 +24,6 @@ interfaceServer.get('/advertisers/:fileName', function(req ,res) {
     var file = path.join(__dirname, req.params.fileName);
     res.sendFile(file);
 });
-
 
 
 interfaceServer.listen(port, function(err) {
