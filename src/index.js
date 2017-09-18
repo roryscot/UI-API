@@ -3,7 +3,7 @@ import './themes/style.css';
 
 import {getObject} from './api/fetchApi.js';
 
-import ajaxController from './controllers/ajaxController.js';
+// import ajaxController from './controllers/ajaxController.js';
 import setupController from './controllers/setupController.js';
 import Prism from '../lib/prism/prism.js';
 
@@ -16,17 +16,21 @@ var url, format;
 var el = document.getElementById("format-selection");
 el.addEventListener("change", function() {
   format = this.value
-  url = '/advertisers/response.' + format
+  url = '/advertisers/response.' + format; 
 
   setupController.clearForSwapping(idsToBeSwapped);
   if (format === 'json') {
     getObject(url).then(function(response) {
        global.document.getElementById(idsToBeSwapped[0]).innerHTML = JSON.stringify(formatHeaders(response), null, 5)
       return response.text()
-    }).then(function(json){
-      formatJson(json)
+    }).then(function(text){
+      formatJson(text)
     }).then(function(result) {
       Prism.highlightAll()
+    }).catch(function(error) {
+      console.log(error);
+      console.log("");
+       global.document.getElementById(idsToBeSwapped[0]).innerHTML = error;
     });
   } else {
     getObject(url).then(function(response) {

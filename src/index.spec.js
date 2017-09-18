@@ -1,5 +1,4 @@
 var {expect} = require('chai');
-var ajaxController = require('./ajaxController');
 var jsdom = require("node-jsdom");
 var fs = require('fs');
 
@@ -19,14 +18,8 @@ describe('interface.html', function() {
       window.close();
     });
   });
-  describe('custom ajax request', function(){``
-    describe("ajaxController", function() {
-      describe("load", function() {
-        it('should return an httpRequest', function(){
-          var testRequest = ajaxController.load('url.example.json');
-          expect(typeof testRequest).to.be(object)
-        });
-      });
-    });
+
+  describe('getObject', function() {
+
   });
 });

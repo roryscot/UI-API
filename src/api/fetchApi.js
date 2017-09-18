@@ -1,4 +1,8 @@
 import 'whatwg-fetch';
+import setupController from '../controllers/setupController.js';
+import idsToBeSwapped from '../idsToBeSwapped.js';
+
+
 
 export function getObject(url) {
   return get(url);
@@ -6,7 +10,14 @@ export function getObject(url) {
 
 //private functions
 function get(url) {
-  return fetch(url).then(onSuccess, onError)
+  return fetch(url).then(function(response) {
+  if(response.ok) {
+    return response;
+  }
+  throw new Error(response.status + " " + response.statusText);
+}).catch(function(er) {
+  onError(er)
+});
 }
 
 function onSuccess(response) {
@@ -14,8 +25,9 @@ function onSuccess(response) {
 }
 
 function onError(error) {
-  return error;
+  setupController.clearForSwapping(idsToBeSwapped);
+  console.log(error);
+  global.document.getElementById(idsToBeSwapped[0]).innerHTML = error;
 }
-
 
 //Only handle get from api handle more complex actions in future deployments
