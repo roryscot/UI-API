@@ -2,7 +2,7 @@ var {expect} = chai = require('chai');
 var chaiAsPromised = require('chai-as-promised');
 chai.use(chaiAsPromised);
 var sinon = require('sinon');
-require('isomorphic-fetch');
+// require('isomorphic-fetch');
 
 var jsdom = require("node-jsdom");
 var fs = require('fs');
@@ -41,26 +41,19 @@ describe('Built index.html', function() {
     });
   });
 
-  it('getObject', function(done) {
+  it('getObject', function() {
     var format = formats[0];
     jsdom.env({
+      url: "http://localhost:3000",
       html: interfaceHTML,
       src: './builds/vendor.js',
       done: function(err, window) {
 
-        var fetchrequests = []; // 3
-        var scripts = window.document.getElementsByTagName('script');
-        //
-        // window.XMLHttpRequest = sinon.useFakeXMLHttpRequest(); // 4
-        // window.XMLHttpRequest.onCreate = function(xhr) { // 5
-        //   ajaxRequests.push(xhr); // 6
-        // };
-
-        expect(getObject(urls[0]).resolve).to.eventually.be(true);
-
+        //USE isomorphic-fetch FOR NODE
+        console.log(getObject(this.url + urls[0]));
+        expect(getObject(this.url + urls[0]).resolve).to.eventually.equal(false);
 
         window.close();
-        done();
     }
     });
   });//getObject

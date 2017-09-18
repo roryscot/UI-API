@@ -1,7 +1,3 @@
-// import 'whatwg-fetch';
-// import setupController from '../controllers/setupController.js';
-// import idsToBeSwapped from '../idsToBeSwapped.js';
-
 require('whatwg-fetch');
 var setupController = require('../controllers/setupController.js');
 var idsToBeSwapped = require('../idsToBeSwapped.js');
@@ -27,7 +23,7 @@ function onSuccess(response) {
 }
 
 function onError(error) {
-  setupController.clearForSwapping(idsToBeSwapped);
+  // setupController.clearForSwapping(idsToBeSwapped);
   throw error;
 }
 

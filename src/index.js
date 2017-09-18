@@ -7,11 +7,15 @@ import Prism from '../lib/prism/prism.js';
 import idsToBeSwapped from './idsToBeSwapped.js';
 import initialStrings from './initialStrings.js';
 
-document.body.onload = setupController.initialNodeGenerator(setupController.loadTextNode, idsToBeSwapped, initialStrings);
+document.body.onload =
+  setupController.initialNodeGenerator(setupController.loadTextNode, idsToBeSwapped, initialStrings);
 
+//declare variables for js
 var url, format, id;
 var el = document.getElementById("format-selection");
 
+
+//attach functionality to dropdown menu
 el.addEventListener("change", function() {
   id = 0;
   format = this.value
@@ -20,6 +24,8 @@ el.addEventListener("change", function() {
   formatGetter(url)
 });
 
+
+//fetch data
 function formatGetter(url) {
   getObject(url).then(function(response) {
       formatHeaders(response)
@@ -29,18 +35,15 @@ function formatGetter(url) {
     }).then(function(result) {
       Prism.highlightAll()
     }).catch(function(er) {
+      setupController.clearForSwapping(idsToBeSwapped);
       window.document.getElementById(idsToBeSwapped[id]).innerHTML = er;
     });
 }
 
+//format data
 function formatResponse(result) {
   // var id;
-  if (format === 'json') {
-    id = 1;
-  }
-  else if (format === 'xml') {
-    id = 2;
-  }
+  if (format === 'json') {id = 1;} else if (format === 'xml') { id = 2; }
   var node = window.document.getElementById(idsToBeSwapped[id]);
   node.innerHTML = document.createTextNode("")
     node.replaceChild(
@@ -50,6 +53,8 @@ function formatResponse(result) {
   return node.innerHTML;
 }
 
+//format headers of response
+//TODO: dynamically put url in html
 function formatHeaders(response) {
   //mocking for expediency
   var display = `HTTP ${response.status} ${response.statusText}, \n`
@@ -58,14 +63,12 @@ function formatHeaders(response) {
     Allow: "GET, POST, HEAD, OPTIONS",
     "Content-Type": response.headers.get("Content-Type")
   };
-
   for (var pair in response.headers.entries()) {
     headers[pair[0]] = pair[1];
   }
-
   for (var i in headers) {
     display += `${i}: ${headers[i]} \n`
   }
-  window.document.getElementById(idsToBeSwapped[0]).innerHTML = display
+  window.document.getElementById(idsToBeSwapped[id]).innerHTML = display
   return display;
 }
