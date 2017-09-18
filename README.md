@@ -1,3 +1,15 @@
+
+use npm scripts to start a server
+
+
+
+
+
+
+
+
+
+
 Webpack installed to automate testing.
 
 lodash installed.
