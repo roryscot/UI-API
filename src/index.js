@@ -20,7 +20,7 @@ el.addEventListener("change", function() {
 
   setupController.clearForSwapping(idsToBeSwapped);
   getObject(url).then(function(response) {
-       global.document.getElementById(idsToBeSwapped[0]).innerHTML = formatHeaders(response)
+      global.document.getElementById(idsToBeSwapped[0]).innerHTML = formatHeaders(response)
       return response.text()
     }).then(function(result) {
         formatResponse(result)
@@ -52,7 +52,7 @@ function formatHeaders(response) {
   var headers = {
     Vary: "Accept",
     Allow: "GET, POST, HEAD, OPTIONS",
-    "Content-Type": "text/html"
+    "Content-Type": response.headers.get("Content-Type")
   };
 
   for (var pair in response.headers.entries()) {
