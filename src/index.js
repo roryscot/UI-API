@@ -1,7 +1,9 @@
 import './themes/style.css';
 
 
-import {getObject} from './api/fetchApi.js';
+// import {getObject} from './api/fetchApi.js';
+// changed to use es5 in testing
+var getObject = require('./api/fetchApi.js');
 
 // import ajaxController from './controllers/ajaxController.js';
 import setupController from './controllers/setupController.js';
@@ -19,15 +21,19 @@ el.addEventListener("change", function() {
   url = '/advertisers/?format=' + format;
 
   setupController.clearForSwapping(idsToBeSwapped);
+  formatGetter(url)
+});
+
+function formatGetter(url) {
   getObject(url).then(function(response) {
-      global.document.getElementById(idsToBeSwapped[0]).innerHTML = formatHeaders(response)
+      formatHeaders(response)
       return response.text()
     }).then(function(result) {
         formatResponse(result)
     }).then(function(result) {
       Prism.highlightAll()
     });
-});
+}
 
 function formatResponse(result) {
   var id;
@@ -37,7 +43,7 @@ function formatResponse(result) {
   else if (format === 'xml') {
     id = 2;
   }
-  var node = global.document.getElementById(idsToBeSwapped[id]);
+  var node = window.document.getElementById(idsToBeSwapped[id]);
   node.innerHTML = document.createTextNode("")
     node.replaceChild(
       document.createTextNode(result),
@@ -62,5 +68,6 @@ function formatHeaders(response) {
   for (var i in headers) {
     display += `${i}: ${headers[i]} \n`
   }
+  window.document.getElementById(idsToBeSwapped[0]).innerHTML = display
   return display;
 }

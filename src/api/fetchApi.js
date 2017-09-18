@@ -1,10 +1,12 @@
-import 'whatwg-fetch';
-import setupController from '../controllers/setupController.js';
-import idsToBeSwapped from '../idsToBeSwapped.js';
+// import 'whatwg-fetch';
+// import setupController from '../controllers/setupController.js';
+// import idsToBeSwapped from '../idsToBeSwapped.js';
 
+require('whatwg-fetch');
+var setupController = require('../controllers/setupController.js');
+var idsToBeSwapped = require('../idsToBeSwapped.js');
 
-
-export function getObject(url) {
+module.exports = function getObject(url) {
   return get(url);
 }
 
@@ -26,7 +28,7 @@ function onSuccess(response) {
 
 function onError(error) {
   setupController.clearForSwapping(idsToBeSwapped);
-  global.document.getElementById(idsToBeSwapped[0]).innerHTML = error;
+  window.document.getElementById(idsToBeSwapped[0]).innerHTML = error;
 }
 
 //Only handle get from api handle more complex actions in future deployments
