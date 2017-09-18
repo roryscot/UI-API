@@ -10,7 +10,6 @@ function get(url) {
 }
 
 function onSuccess(response) {
-  console.log(response);
   return response;
 }
 

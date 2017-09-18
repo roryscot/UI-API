@@ -32,7 +32,7 @@ function ajaxController() {
         }
     };
 
-    console.log(typeof httpRequest)
+    console.log(httpRequest)
     httpRequest.open('GET', url, true);
     httpRequest.send();
 
@@ -40,6 +40,7 @@ function ajaxController() {
   }
 // run replaceObject on an instance of a request
   function replaceObject(httpRequest, url, headersId, responseId, syntaxHighlighting) {
+    console.log(responseText);
     var responseToBeFormatted = httpRequest.responseText;
     var headers = `HTTP ${httpRequest.status} ${httpRequest.statusText}\n`;
     headers += (httpRequest.getAllResponseHeaders());
