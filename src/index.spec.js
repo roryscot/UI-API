@@ -48,7 +48,6 @@ describe('Built index.html', function() {
       src: './builds/vendor.js',
       done: function(err, window) {
 
-        var documet = interfaceHTML;
         var fetchrequests = []; // 3
         var scripts = window.document.getElementsByTagName('script');
         //
@@ -57,8 +56,7 @@ describe('Built index.html', function() {
         //   ajaxRequests.push(xhr); // 6
         // };
 
-        getObject(urls[0]);
-        console.log(scripts);
+        expect(getObject(urls[0]).resolve).to.eventually.be(true);
 
 
         window.close();

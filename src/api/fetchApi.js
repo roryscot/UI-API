@@ -18,7 +18,7 @@ function get(url) {
   }
   throw new Error(response.status + " " + response.statusText);
 }).catch(function(er) {
-  onError(er)
+  return onError(er)
 });
 }
 
@@ -28,7 +28,7 @@ function onSuccess(response) {
 
 function onError(error) {
   setupController.clearForSwapping(idsToBeSwapped);
-  window.document.getElementById(idsToBeSwapped[0]).innerHTML = error;
+  throw error;
 }
 
 //Only handle get from api handle more complex actions in future deployments

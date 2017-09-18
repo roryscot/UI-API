@@ -1,11 +1,6 @@
 import './themes/style.css';
-
-
-// import {getObject} from './api/fetchApi.js';
-// changed to use es5 in testing
 var getObject = require('./api/fetchApi.js');
 
-// import ajaxController from './controllers/ajaxController.js';
 import setupController from './controllers/setupController.js';
 import Prism from '../lib/prism/prism.js';
 
@@ -14,12 +9,13 @@ import initialStrings from './initialStrings.js';
 
 document.body.onload = setupController.initialNodeGenerator(setupController.loadTextNode, idsToBeSwapped, initialStrings);
 
-var url, format;
+var url, format, id;
 var el = document.getElementById("format-selection");
+
 el.addEventListener("change", function() {
+  id = 0;
   format = this.value
   url = '/advertisers/?format=' + format;
-
   setupController.clearForSwapping(idsToBeSwapped);
   formatGetter(url)
 });
@@ -32,11 +28,13 @@ function formatGetter(url) {
         formatResponse(result)
     }).then(function(result) {
       Prism.highlightAll()
+    }).catch(function(er) {
+      window.document.getElementById(idsToBeSwapped[id]).innerHTML = er;
     });
 }
 
 function formatResponse(result) {
-  var id;
+  // var id;
   if (format === 'json') {
     id = 1;
   }
