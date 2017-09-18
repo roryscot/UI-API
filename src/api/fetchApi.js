@@ -26,7 +26,6 @@ function onSuccess(response) {
 
 function onError(error) {
   setupController.clearForSwapping(idsToBeSwapped);
-  console.log(error);
   global.document.getElementById(idsToBeSwapped[0]).innerHTML = error;
 }
 

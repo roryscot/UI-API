@@ -16,32 +16,41 @@ var url, format;
 var el = document.getElementById("format-selection");
 el.addEventListener("change", function() {
   format = this.value
-  url = '/advertisers/response.' + format; 
+  // url = '/advertisers/response.' + format;
+  url = '/advertisers/?format=' + format;
 
   setupController.clearForSwapping(idsToBeSwapped);
-  if (format === 'json') {
-    getObject(url).then(function(response) {
+  // if (format === 'json') {
+  //   getObject(url).then(function(response) {
+  //      global.document.getElementById(idsToBeSwapped[0]).innerHTML = JSON.stringify(formatHeaders(response), null, 5)
+  //     return response.text()
+  //   }).then(function(text){
+  //     formatJson(text)
+  //   }).then(function(result) {
+  //     Prism.highlightAll()
+  //   });
+  // } else {
+  //   getObject(url).then(function(response) {
+  //      global.document.getElementById(idsToBeSwapped[0]).innerHTML = JSON.stringify(formatHeaders(response), null, 5)
+  //     return response.text()
+  //   }).then(function(result) {
+  //     console.log(result)
+  //       formatXml(result)
+  //   }).then(function(result) {
+  //     Prism.highlightAll()
+  //   });
+  // }
+
+
+  getObject(url).then(function(response) {
        global.document.getElementById(idsToBeSwapped[0]).innerHTML = JSON.stringify(formatHeaders(response), null, 5)
       return response.text()
-    }).then(function(text){
-      formatJson(text)
     }).then(function(result) {
-      Prism.highlightAll()
-    }).catch(function(error) {
-      console.log(error);
-      console.log("");
-       global.document.getElementById(idsToBeSwapped[0]).innerHTML = error;
-    });
-  } else {
-    getObject(url).then(function(response) {
-       global.document.getElementById(idsToBeSwapped[0]).innerHTML = JSON.stringify(formatHeaders(response), null, 5)
-      return response.text()
-    }).then(function(result) {
-        formatXml(result)
+      console.log(result)
+        formatResponse(result)
     }).then(function(result) {
       Prism.highlightAll()
     });
-  }
 });
 
 function formatJson(result) {
@@ -54,8 +63,27 @@ function formatJson(result) {
       return node.innerHTML;
 }
 
+
 function formatXml(result) {
+  console.log(format)
   var node = global.document.getElementById(idsToBeSwapped[2]);
+  node.innerHTML = document.createTextNode("")
+    node.replaceChild(
+      document.createTextNode(result),
+    node.lastChild
+    ).innerHTML = result;
+  return node.innerHTML;
+}
+
+function formatResponse(result) {
+  var id;
+  if (format === 'json') {
+    id = 1;
+  }
+  else if (format === 'xml') {
+    id = 2;
+  }
+  var node = global.document.getElementById(idsToBeSwapped[id]);
   node.innerHTML = document.createTextNode("")
     node.replaceChild(
       document.createTextNode(result),

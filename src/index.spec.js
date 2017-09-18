@@ -2,6 +2,8 @@ var {expect} = require('chai');
 var jsdom = require("node-jsdom");
 var fs = require('fs');
 
+var 
+
 describe('sanity check', function() {
   it('should pass', function() {
     expect(true).to.equal(true);
