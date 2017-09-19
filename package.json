@@ -7,7 +7,7 @@
     "build": "webpack --config webpack.config.dev.js",
     "watch": "webpack --watch",
     "start": "node buildScripts/srcServer.js",
-    "test": "mocha --reporter progress buildScripts/testSetup.js \"src/**/*.spec.js\"",
+    "test": "mocha --reporter progress buildScripts/testSetup.js \"src/**/**/*.spec.js\"",
     "test:watch": "npm run test -- --watch",
     "build:p": "node buildScripts/build.js"
   },

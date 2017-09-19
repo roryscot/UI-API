@@ -28,7 +28,7 @@ describe('interface.html', function() {
   });
 });
 
-describe('Built index.html', function() {
+describe('integration testing', function() {
   var interfaceHTML = fs.readFileSync('src/builds/index.html', 'utf-8');
   var urls = ['/advertisers/?format=json', '/advertisers/?format=xml'];
   var formats = ['json', 'xml'];
@@ -41,8 +41,9 @@ describe('Built index.html', function() {
     });
   });
 
-  it('getObject', function() {
+  it.skip('getObject', function() {
     var format = formats[0];
+    var response;
     jsdom.env({
       url: "http://localhost:3000",
       html: interfaceHTML,
@@ -51,10 +52,12 @@ describe('Built index.html', function() {
 
         //USE isomorphic-fetch FOR NODE
         console.log(getObject(this.url + urls[0]));
-        expect(getObject(this.url + urls[0]).resolve).to.eventually.equal(false);
+        response = getObject(this.url + urls[0]).resolve
 
         window.close();
     }
+
     });
+    expect(response).to.equal(false);
   });//getObject
 });//describe block

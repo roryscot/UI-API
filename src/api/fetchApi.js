@@ -23,7 +23,6 @@ function onSuccess(response) {
 }
 
 function onError(error) {
-  // setupController.clearForSwapping(idsToBeSwapped);
   throw error;
 }
 

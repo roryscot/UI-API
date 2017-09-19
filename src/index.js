@@ -1,5 +1,7 @@
 import './themes/style.css';
 var getObject = require('./api/fetchApi.js');
+var changeCall = require('./api/changeCall.js');
+// import changeCall from './api/changeCall.js';
 
 import setupController from './controllers/setupController.js';
 import Prism from '../lib/prism/prism.js';
@@ -10,13 +12,13 @@ import initialStrings from './initialStrings.js';
 document.body.onload =
   setupController.initialNodeGenerator(setupController.loadTextNode, idsToBeSwapped, initialStrings);
 
-//declare variables for js
+//declare variables for build
 var url, format, id;
-var el = document.getElementById("format-selection");
+var dropdown = document.getElementById("format-selection");
 
 
 //attach functionality to dropdown menu
-el.addEventListener("change", function() {
+dropdown.addEventListener("change", function() {
   id = 0;
   format = this.value
   url = '/advertisers/?format=' + format;
@@ -24,23 +26,22 @@ el.addEventListener("change", function() {
   formatGetter(url)
 });
 
-
-//fetch data
+//fetch data and dynamically format html
 function formatGetter(url) {
   getObject(url).then(function(response) {
-      formatHeaders(response)
+      changeCall.formatHeaders(response)
       return response.text()
     }).then(function(result) {
         formatResponse(result)
     }).then(function(result) {
       Prism.highlightAll()
     }).catch(function(er) {
-      setupController.clearForSwapping(idsToBeSwapped);
-      window.document.getElementById(idsToBeSwapped[id]).innerHTML = er;
+      changeCall.formatError(er);
     });
 }
 
-//format data
+//out here to have access to 'format'
+
 function formatResponse(result) {
   // var id;
   if (format === 'json') {id = 1;} else if (format === 'xml') { id = 2; }
@@ -51,24 +52,4 @@ function formatResponse(result) {
     node.lastChild
     ).innerHTML = result;
   return node.innerHTML;
-}
-
-//format headers of response
-//TODO: dynamically put url in html
-function formatHeaders(response) {
-  //mocking for expediency
-  var display = `HTTP ${response.status} ${response.statusText}, \n`
-  var headers = {
-    Vary: "Accept",
-    Allow: "GET, POST, HEAD, OPTIONS",
-    "Content-Type": response.headers.get("Content-Type")
-  };
-  for (var pair in response.headers.entries()) {
-    headers[pair[0]] = pair[1];
-  }
-  for (var i in headers) {
-    display += `${i}: ${headers[i]} \n`
-  }
-  window.document.getElementById(idsToBeSwapped[id]).innerHTML = display
-  return display;
 }
