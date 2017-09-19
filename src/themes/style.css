@@ -1,3 +1,7 @@
+html {
+  font-size: 16px;
+}
+
 body {
    background-image: url("../img/background.png");
 }
@@ -29,14 +33,13 @@ body {
 }
 
 .version {
-    font-size: 70%;
+    font-size: 0.7rem;
 }
 
 .selector {
-  margin-right: 50px;
-  margin-top: 25px;
+  margin-top: 1.5rem;
   float: right;
-  height: 30px;
+  height: 2rem;
 }
 
 .select-format {
@@ -44,14 +47,14 @@ body {
   display: inline-block;
   text-align: center;
 
-  height: 40px;
-  width: 80px;
+  height: 2.5rem;
+  width: 5.5rem;
   color: white;
   background-color: royalblue;
   border: 1px solid transparent;
   border-color: darkblue;
   border-radius: 6px;
-  font-size: 14px;
+  font-size: 0.9rem;
   cursor: pointer;
 }
 
@@ -97,12 +100,12 @@ body {
 .container {
   font-family: Arial,sans-serif;
 
-    width: 1170px;
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-top: 100px;
+    width: 70rem;
+    padding-right: 1.5rem;
+    padding-left: 5rem;
+    margin-top: 8.5rem;
     margin-right: auto;
-    margin-left: 50px;
+    margin-left: 3rem;
 }
 
 .content-header {
@@ -118,13 +121,13 @@ body {
   border-radius: 6px;
   background-color: ghostwhite;
   border: 1px solid lightgrey;
-  line-height: 30px;
+  line-height: 2rem;
 }
 
 .method {
   font-weight: bold;
   position: relative;
-  padding-left: 10px;
+  padding-left: .75rem;
 }
 
 .codeBlock {
@@ -137,8 +140,8 @@ body {
 }
 
 pre {
-  border-radius: 25px;
+  border-radius: 1.5rem;
   background-color: ghostwhite;
-  line-height: 30px;
+  line-height: 2rem;
   background-color: transparent!important;
 }
