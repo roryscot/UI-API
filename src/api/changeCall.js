@@ -1,8 +1,7 @@
 var setupController = require ('../controllers/setupController.js');
 var idsToBeSwapped = require('../idsToBeSwapped.js');
-// import {getObject} from './fetchApi.js';
-// var getObject = require('./fetchApi.js');
 
+//defining id for initial call
 var id = 0;
 
 function changeCall() {
@@ -16,6 +15,7 @@ function changeCall() {
         document.createTextNode(result),
       node.lastChild
       ).innerHTML = result;
+
     return node.innerHTML;
   }
 
@@ -26,10 +26,12 @@ function changeCall() {
     var display = `HTTP ${response.status} ${response.statusText}, \n`
     var headers = {
       Vary: "Accept",
-      Allow: "GET, POST, HEAD, OPTIONS",
-      "Content-Type": response.headers.get("Content-Type")
+      Allow: "GET",
     };
-    for (var pair in response.headers.entries()) {
+    var temp = response.headers.entries()
+    console.log(temp);
+    for (var pair of temp) {
+      console.log(pair);
       headers[pair[0]] = pair[1];
     }
     for (var i in headers) {
@@ -41,7 +43,7 @@ function changeCall() {
 
   //format and display error
   function formatError(er) {
-    setupController.clearForSwapping(idsToBeSwapped);
+    // setupController.clearForSwapping(idsToBeSwapped);
     window.document.getElementById(idsToBeSwapped[id]).innerHTML = er;
   }
 

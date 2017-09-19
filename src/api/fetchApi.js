@@ -1,6 +1,4 @@
 require('whatwg-fetch');
-var setupController = require('../controllers/setupController.js');
-var idsToBeSwapped = require('../idsToBeSwapped.js');
 
 module.exports = function getObject(url) {
   return get(url);
